@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Innervy — Official User Manual & Interactive Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6366F1;
+      --primary-hover: #4F46E5;
+      --primary-light: #EEF2FF;
+      --secondary: #8B5CF6;
+      --accent: #10B981;
+      --accent-light: #ECFDF5;
+      --warning: #F59E0B;
+      --warning-light: #FFFBEB;
+      --bg: #F8FAFC;
+      --sidebar-bg: #FFFFFF;
+      --card-bg: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --text-subtle: #94A3B8;
+      --border-color: #E2E8F0;
+      --border-light: #F1F5F9;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
+      --shadow-md: 0 10px 25px -5px rgba(99, 102, 241, 0.08), 0 8px 10px -6px rgba(0,0,0,0.02);
+      --shadow-lg: 0 20px 35px -10px rgba(15, 23, 42, 0.12), 0 10px 15px -5px rgba(0,0,0,0.04);
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      display: flex;
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Modern Background Ambient Glows */
+    .bg-glow-1 {
+      position: fixed;
+      top: -150px;
+      right: -100px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, rgba(248, 250, 252, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-glow-2 {
+      position: fixed;
+      bottom: -150px;
+      left: 200px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, rgba(248, 250, 252, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 300px;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border-color);
+      padding: 32px 20px;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      overflow-y: auto;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 2px 0 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .sidebar-top {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 10px 28px 10px;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 24px;
+    }
+
+    .brand img {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      object-fit: cover;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
+    }
+
+    .brand-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.6px;
+    }
+
+    .brand-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* Search Box */
+    .search-container {
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 14px 10px 38px;
+      background: var(--bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--text-main);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: var(--text-subtle);
+    }
+
+    .nav-group-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      letter-spacing: 1.2px;
+      margin: 12px 10px 10px 10px;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      border-radius: var(--radius-md);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-link:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      transform: translateX(3px);
+    }
+
+    .nav-link.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+    }
+
+    .nav-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.05);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .nav-link.active .nav-num {
+      background: rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+    }
+
+    .sidebar-footer {
+      padding: 20px 10px 0 10px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .version-badge {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .version-pill {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .download-pdf-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 11px 14px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+    }
+
+    .download-pdf-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
+    }
+
+    .download-pdf-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .sidebar-btn-app {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 11px 14px;
+      background: #10B981;
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 14px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    }
+
+    .sidebar-btn-app:hover {
+      background: #059669;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35);
+    }
+
+    .sidebar-btn-app svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .hero-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #10B981;
+      color: #FFFFFF;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .hero-btn-primary:hover {
+      background: #059669;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(16, 185, 129, 0.45);
+    }
+
+    /* Main Content */
+    main {
+      margin-left: 300px;
+      flex: 1;
+      padding: 48px 64px 80px 64px;
+      max-width: 1200px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hero Header Banner */
+    .hero {
+      background: linear-gradient(135deg, #1E1B4B 0%, #312E81 50%, #4338CA 100%);
+      border-radius: var(--radius-xl);
+      padding: 48px 52px;
+      color: #FFFFFF;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -10px rgba(49, 46, 129, 0.3);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-title {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 720px;
+      line-height: 1.65;
+      font-weight: 400;
+      margin-bottom: 28px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 500;
+    }
+
+    /* Section Cards */
+    .doc-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 44px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .doc-section:hover {
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .section-num-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .section-title-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.5px;
+    }
+
+    .section-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    /* Callout Alert Boxes */
+    .callout {
+      padding: 18px 22px;
+      border-radius: var(--radius-md);
+      margin-bottom: 28px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .callout-info {
+      background: #F0F9FF;
+      border: 1px solid #BAE6FD;
+      color: #0369A1;
+    }
+
+    .callout-tip {
+      background: var(--accent-light);
+      border: 1px solid #A7F3D0;
+      color: #047857;
+    }
+
+    .callout-warning {
+      background: var(--warning-light);
+      border: 1px solid #FDE68A;
+      color: #B45309;
+    }
+
+    .callout-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    /* Feature Box Component */
+    .feature-card {
+      background: var(--bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .feature-card:hover {
+      background: #FFFFFF;
+      border-color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .feature-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .feature-icon {
+      font-size: 20px;
+    }
+
+    .feature-title {
+      font-size: 16.5px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .feature-body {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .action-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      align-self: flex-start;
+    }
+
+    /* Phone Mockup Frame for Screenshots */
+    .screenshot-showcase {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 36px;
+      padding: 28px;
+      background: linear-gradient(180deg, #F1F5F9 0%, #E2E8F0 100%);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-color);
+    }
+
+    .phone-frame {
+      position: relative;
+      width: 280px;
+      border-radius: 38px;
+      background: #090D16;
+      padding: 10px;
+      box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.35), 0 0 0 1px rgba(255,255,255,0.1) inset;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .phone-frame:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 30px 60px -12px rgba(99, 102, 241, 0.35);
+    }
+
+    .phone-notch {
+      width: 100px;
+      height: 18px;
+      background: #090D16;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: auto;
+      border-radius: 30px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .phone-caption {
+      text-align: center;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    /* Interactive Spotlight Steps Accordion / Tabs */
+    .spotlight-interactive-container {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 32px;
+      align-items: start;
+      background: #F8FAFC;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+    }
+
+    .spotlight-steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .spotlight-step-item {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .spotlight-step-item:hover, .spotlight-step-item.active {
+      border-color: var(--primary);
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.12);
+    }
+
+    .spotlight-step-item.active {
+      background: var(--primary-light);
+    }
+
+    .step-badge-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #E2E8F0;
+      color: var(--text-main);
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .spotlight-step-item.active .step-badge-num {
+      background: var(--primary);
+      color: #FFFFFF;
+    }
+
+    .step-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .step-title-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .step-desc-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .spotlight-preview-pane {
+      position: sticky;
+      top: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .preview-frame {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 32px;
+      border: 8px solid #0F172A;
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      max-width: 380px;
+      width: 100%;
+      border-radius: 36px;
+      border: 10px solid #000;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      color: #FFFFFF;
+      font-size: 32px;
+      cursor: pointer;
+      font-weight: 300;
+    }
+
+    /* Responsive Breakdown */
+    @media (max-width: 992px) {
+      .sidebar {
+        display: none;
+      }
+      main {
+        margin-left: 0;
+        padding: 24px;
+      }
+      .spotlight-interactive-container {
+        grid-template-columns: 1fr;
+      }
+      .spotlight-preview-pane {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Glow Backgrounds -->
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <a href="#" class="brand">
+        <img src="../assets/image/logo.png" alt="Innervy Logo">
+        <div class="brand-info">
+          <span class="brand-title">Innervy</span>
+          <span class="brand-tag">User Manual</span>
+        </div>
+      </a>
+
+      <!-- Quick Search Input -->
+      <div class="search-container">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="manualSearch" class="search-input" placeholder="Search guide..." aria-label="Search manual guide">
+      </div>
+
+      <div class="nav-group-title">User Manual Flow</div>
+      <ul class="nav-list" id="navList">
+        <li class="nav-item">
+          <a href="#overview" class="nav-link active">
+            <span class="nav-num">✨</span> Overview & Vision
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#auth" class="nav-link">
+            <span class="nav-num">1</span> Onboarding & Access
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#spotlight" class="nav-link">
+            <span class="nav-num">2</span> Interactive Spotlight
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#dashboard" class="nav-link">
+            <span class="nav-num">3</span> Home & Bento Grid
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#journal" class="nav-link">
+            <span class="nav-num">4</span> Daily Check-In & Notes
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#practices" class="nav-link">
+            <span class="nav-num">5</span> Mindful Practices
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#calendar" class="nav-link">
+            <span class="nav-num">6</span> Reflection Calendar
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#reminders" class="nav-link">
+            <span class="nav-num">7</span> Reminders & Quotes
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="version-badge">
+        <span>Application Version</span>
+        <span class="version-pill">v1.0.0 (Flutter)</span>
+      </div>
+      <a href="https://drive.google.com/file/d/1X_XS2VkYcjSoVROPCwH4ZHduujJfBgwA/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="sidebar-btn-app">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+        </svg>
+        Download App
+      </a>
+      <a href="pdf_manual.html?print=true" target="_blank" class="download-pdf-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9z" />
+        </svg>
+        Download PDF Manual
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main>
+
+    <!-- Hero Header Banner -->
+    <header class="hero" id="overview">
+      <div class="hero-badge">🌿 Official User Documentation</div>
+      <h1 class="hero-title">Welcome to Innervy</h1>
+      <p class="hero-subtitle">Innervy is your private companion for overcoming Impostor Syndrome, cultivating self-compassion, and tracking emotional growth through intelligent daily reflections.</p>
+
+      <div class="hero-cta-group">
+        <a href="https://drive.google.com/file/d/1X_XS2VkYcjSoVROPCwH4ZHduujJfBgwA/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="hero-btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          Download Innervy App
+        </a>
+      </div>
+
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-value">OAuth 2.0 & Guest</span>
+          <span class="stat-label">Privacy First Access</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">Isolated Hive DB</span>
+          <span class="stat-label">Local On-Device Storage</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">5 Mental States</span>
+          <span class="stat-label">Real-Time Insight Engine</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTION 1: Onboarding & Authentication -->
+    <section id="auth" class="doc-section">
+      <div class="section-header">
+        <div class="section-num-icon">1</div>
+        <div class="section-title-wrapper">
+          <span class="section-tag">Getting Started</span>
+          <h2 class="section-title">Onboarding & Authentication</h2>
+        </div>
+      </div>
+      <p class="section-desc">Experience seamless, flexible entry into Innervy. Sign in securely using Google OAuth 2.0 or jump straight into Guest Mode with local database isolation.</p>
+
+      <div class="callout callout-info">
+        <span class="callout-icon">🔒</span>
+        <div><strong>Privacy Guaranteed:</strong> Each user account receives an isolated Hive database stored locally on your device. Switching accounts or using Guest Mode automatically switches database isolates.</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="feature-card">
+          <div>
+            <div class="feature-head">
+              <span class="feature-icon">🔑</span>
+              <h3 class="feature-title">Google Sign-In</h3>
+            </div>
+            <p class="feature-body">Authenticates via official Google OAuth 2.0 protocols. Displays user profile details (display name, email, and avatar) across the dashboard.</p>
+          </div>
+          <span class="action-badge">Tap "Sign in with Google"</span>
+        </div>
+
+        <div class="feature-card">
+          <div>
+            <div class="feature-head">
+              <span class="feature-icon">👤</span>
+              <h3 class="feature-title">Guest Mode</h3>
+            </div>
+            <p class="feature-body">Instant, single-tap access without account creation. Perfect for users who prioritize total anonymity and offline usage.</p>
+          </div>
+          <span class="action-badge">Tap "Continue as Guest"</span>
+        </div>
+      </div>
+
+      <!-- Screenshot Preview Frame -->
+      <div class="screenshot-showcase">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <img src="assets/screenshots/login_screen.png" alt="Login Screen UI" class="phone-screen clickable-img">
+          <div class="phone-caption">Figure 1.1: Authentication Screen</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Interactive Spotlight Tour Guide -->
+    <section id="spotlight" class="doc-section">
+      <div class="section-header">
+        <div class="section-num-icon">2</div>
+        <div class="section-title-wrapper">
+          <span class="section-tag">UI Walkthrough</span>
+          <h2 class="section-title">Interactive Spotlight Tour Sequence</h2>
+        </div>
+      </div>
+      <p class="section-desc">Innervy features an automated Spotlight Showcase when launched for the first time. This interactive tour highlights key UI elements to help you navigate your emotional growth journey. Click any step below to preview!</p>
+
+      <div class="spotlight-interactive-container">
+        <!-- Steps List -->
+        <div class="spotlight-steps-list" id="spotlightStepsList">
+          <div class="spotlight-step-item active" data-img="assets/screenshots/spotlight_step1_checkin.png">
+            <div class="step-badge-num">1</div>
+            <div class="step-content">
+              <span class="step-title-text">Daily Inspiration Quote 💡</span>
+              <span class="step-desc-text">Spotlights the quote card delivering mindful wisdom tailored to your current emotional state.</span>
+            </div>
+          </div>
+
+          <div class="spotlight-step-item" data-img="assets/screenshots/spotlight_step2_quote.png">
+            <div class="step-badge-num">2</div>
+            <div class="step-content">
+              <span class="step-title-text">Stats Bento Grid 📊</span>
+              <span class="step-desc-text">Highlights your Compassion % gauge meter, daily check-in streak counter, and state badge.</span>
+            </div>
+          </div>
+
+          <div class="spotlight-step-item" data-img="assets/screenshots/spotlight_step3_stats.png">
+            <div class="step-badge-num">3</div>
+            <div class="step-content">
+              <span class="step-title-text">Daily Practices Grid 🧘</span>
+              <span class="step-desc-text">Spotlights the interactive Reality Check (cognitive reframing) and Deep Breath cards.</span>
+            </div>
+          </div>
+
+          <div class="spotlight-step-item" data-img="assets/screenshots/spotlight_step4_practices.png">
+            <div class="step-badge-num">4</div>
+            <div class="step-content">
+              <span class="step-title-text">Reflection Calendar 📅</span>
+              <span class="step-desc-text">Auto-scrolls down to spotlight the calendar card for day, week, and month highlights.</span>
+            </div>
+          </div>
+
+          <div class="spotlight-step-item" data-img="assets/screenshots/spotlight_step5_calendar.png">
+            <div class="step-badge-num">5</div>
+            <div class="step-content">
+              <span class="step-title-text">Check-In Reminders 🔔</span>
+              <span class="step-desc-text">Spotlights the daily background notification controls card and active schedule badge.</span>
+            </div>
+          </div>
+
+          <div class="spotlight-step-item" data-img="assets/screenshots/spotlight_step6_reminders.png">
+            <div class="step-badge-num">6</div>
+            <div class="step-content">
+              <span class="step-title-text">New Reflection FAB ✍️</span>
+              <span class="step-desc-text">Spotlights the primary floating check-in button available on the main dashboard.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Preview Pane -->
+        <div class="spotlight-preview-pane">
+          <img id="spotlightActiveImage" src="assets/screenshots/spotlight_step1_checkin.png" alt="Spotlight Step Preview" class="preview-frame clickable-img">
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Home Dashboard & Bento Analytics -->
+    <section id="dashboard" class="doc-section">
+      <div class="section-header">
+        <div class="section-num-icon">3</div>
+        <div class="section-title-wrapper">
+          <span class="section-tag">Core Hub</span>
+          <h2 class="section-title">Home Dashboard & Bento Analytics</h2>
+        </div>
+      </div>
+      <p class="section-desc">Your personal space designed with glassmorphism cards and ambient animated gradients to give you immediate clarity on your streak, emotional balance, and mindful habits.</p>
+
+      <div class="grid-3">
+        <div class="feature-card">
+          <div class="feature-head">
+            <span class="feature-icon">👋</span>
+            <h3 class="feature-title">Personal Greeting</h3>
+          </div>
+          <p class="feature-body">Displays <i>"Welcome back, Kind Soul"</i> (or your authenticated Google name) alongside quick account switching controls.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-head">
+            <span class="feature-icon">🔥</span>
+            <h3 class="feature-title">Streak Counter</h3>
+          </div>
+          <p class="feature-body">Tracks uninterrupted consecutive days of self-reflection to build lasting mindfulness habits.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-head">
+            <span class="feature-icon">📊</span>
+            <h3 class="feature-title">Compassion Meter</h3>
+          </div>
+          <p class="feature-body">Animated gauge computing your overall self-kindness score and dominant mental state badge.</p>
+        </div>
+      </div>
+
+      <div class="screenshot-showcase">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <img src="assets/screenshots/home_dashboard.png" alt="Home Dashboard UI" class="phone-screen clickable-img">
+          <div class="phone-caption">Figure 3.1: Main Dashboard Bento Grid</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Daily Check-In & Reflections -->
+    <section id="journal" class="doc-section">
+      <div class="section-header">
+        <div class="section-num-icon">4</div>
+        <div class="section-title-wrapper">
+          <span class="section-tag">Daily Reflection</span>
+          <h2 class="section-title">Daily Check-In & Journaling</h2>
+        </div>
+      </div>
+      <p class="section-desc">Capture your feelings accurately using emotion chips, multiline journal prompts, and intelligent real-time sentiment analysis.</p>
+
+      <div class="grid-2">
+        <div class="feature-card">
+          <div>
+            <div class="feature-head">
+              <span class="feature-icon">🏷️</span>
+              <h3 class="feature-title">Curated Emotion Chips</h3>
+            </div>
+            <p class="feature-body">Select from specific emotion tags tailored for impostor feelings: <i>Fraud, Inadequate, Anxious, Worthy, Resilient, Growing</i>.</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div>
+            <div class="feature-head">
+              <span class="feature-icon">💡</span>
+              <h3 class="feature-title">Smart Sentiment Engine</h3>
+            </div>
+            <p class="feature-body">As you write in the journal text box, relevant emotion chips are dynamically recommended based on sentiment keywords.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon">✨</span>
+        <div><strong>Mental State Classification:</strong> Based on selected emotions and score weights, Innervy classifies entries into 5 distinct state badges: 🌟 <i>Self-Compassion</i>, ✨ <i>Mindfulness</i>, ☁️ <i>Neutral</i>, 🩹 <i>Self-Criticism</i>, and 🫂 <i>Impostor Syndrome</i>.</div>
+      </div>
+
+      <div class="screenshot-showcase">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <img src="assets/screenshots/journal_reflection.png" alt="Journal Reflection UI" class="phone-screen clickable-img">
+          <div class="phone-caption">Figure 4.1: Check-in Journal & Emotion Chips</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Mindful Practices & Tools -->
+    <section id="practices" class="doc-section">
+      <div class="section-header">
+        <div class="section-num-icon">5</div>
+        <div class="section-title-wrapper">
+          <span class="section-tag">Self-Regulation</span>
+          <h2 class="section-title">Mindful Practices & Reframing</h2>
+        </div>
+      </div>
+      <p class="section-desc">Interactive practices built on Cognitive Behavioral Therapy (CBT) principles to deconstruct imposter thoughts and calm your nervous system.</p>
+
+      <div class="grid-3">
+        <div class="feature-card">
+          <div class="feature-head">
+            <span class="feature-icon">🔍</span>
+            <h3 class="feature-title">The Reality Check</h3>
+          </div>
+          <p class="feature-body">A 5-step guided reframing tool to contrast subjective self-critical thoughts against objective reality.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-head">
+            <span class="feature-icon">🌬️</span>
+            <h3 class="feature-title">Deep Breath Session</h3>
+          </div>
+          <p class="feature-body">Guided rhythmic breathing exercise with expanding visual animations for acute stress relief.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-head">
+            <span class="feature-icon">🫂</span>
+            <h3 class="feature-title">Self-Compassion Break</h3>
+          </div>
+          <p class="feature-body">Structured 3-step exercise focusing on mindfulness, common humanity, and self-kindness.</p>
+        </div>
+      </div>
+
+      <div class="screenshot-showcase">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <img src="assets/screenshots/daily_practices.png" alt="Mindful Practices Cards" class="phone-screen clickable-img">
+          <div class="phone-caption">Figure 5.1: Daily Practices Grid</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: Reflection Calendar & History -->
+    <section id="calendar" class="doc-section">
+      <div class="section-header">
+        <div class="section-num-icon">6</div>
+        <div class="section-title-wrapper">
+          <span class="section-tag">Growth Journey</span>
+          <h2 class="section-title">Reflection Calendar & History</h2>
+        </div>
+      </div>
+      <p class="section-desc">Review your emotional patterns over time with interactive timeline views, color-coded calendar markers, and entry editing tools.</p>
+
+      <div class="grid-2">
+        <div class="feature-card">
+          <div class="feature-head">
+            <span class="feature-icon">📅</span>
+            <h3 class="feature-title">Day / Week / Month Views</h3>
+          </div>
+          <p class="feature-body">Switch between daily timelines, weekly trends, and monthly calendar heatmaps with custom state-color indicators.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-head">
+            <span class="feature-icon">✏️</span>
+            <h3 class="feature-title">Edit & Manage Entries</h3>
+          </div>
+          <p class="feature-body">Tap any past entry to adjust journal notes or emotions. Deletions require a safety confirmation dialog.</p>
+        </div>
+      </div>
+
+      <div class="callout callout-warning">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>Future Date Protection:</strong> Innervy includes strict date validation to prevent logging reflections for future dates, ensuring accurate timeline integrity.</div>
+      </div>
+
+      <div class="screenshot-showcase">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <img src="assets/screenshots/reflection_calendar.png" alt="Reflection Calendar UI" class="phone-screen clickable-img">
+          <div class="phone-caption">Figure 6.1: Reflection Calendar View</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: Background Reminders & Daily Quotes -->
+    <section id="reminders" class="doc-section">
+      <div class="section-header">
+        <div class="section-num-icon">7</div>
+        <div class="section-title-wrapper">
+          <span class="section-tag">Automated Care</span>
+          <h2 class="section-title">Background Reminders & Daily Quotes</h2>
+        </div>
+      </div>
+      <p class="section-desc">Configure native background reminders to receive mindful quote notifications at your ideal time of day.</p>
+
+      <div class="grid-2">
+        <div class="feature-card">
+          <div class="feature-head">
+            <span class="feature-icon">🔔</span>
+            <h3 class="feature-title">Schedule Reminders</h3>
+          </div>
+          <p class="feature-body">Set a custom time using native time pickers (default 8:00 PM). Automatically schedules exact alarms with device timezone support.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-head">
+            <span class="feature-icon">💬</span>
+            <h3 class="feature-title">Mindful Quotes</h3>
+          </div>
+          <p class="feature-body">Delivers inspirational wisdom directly to your device status bar when the app is inactive.</p>
+        </div>
+      </div>
+
+      <div class="screenshot-showcase">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <img src="assets/screenshots/reminder_settings.png" alt="Reminder Settings Sheet" class="phone-screen clickable-img">
+          <div class="phone-caption">Figure 7.1: Daily Reminder Control Sheet</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Image Lightbox Modal -->
+  <div class="lightbox-modal" id="lightbox">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <img src="" alt="Enlarged View" class="lightbox-content" id="lightboxImg">
+  </div>
+
+  <!-- Interactive JS -->
+  <script>
+    // 1. Spotlight Steps Preview Toggle
+    const stepItems = document.querySelectorAll('.spotlight-step-item');
+    const previewImg = document.getElementById('spotlightActiveImage');
+
+    stepItems.forEach(item => {
+      item.addEventListener('click', () => {
+        stepItems.forEach(s => s.classList.remove('active'));
+        item.classList.add('active');
+        const newSrc = item.getAttribute('data-img');
+        previewImg.src = newSrc;
+      });
+    });
+
+    // 2. Lightbox Modal
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    document.querySelectorAll('.clickable-img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+      });
+    });
+
+    lightboxClose.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.classList.remove('active');
+      }
+    });
+
+    // 3. Search Filter
+    const searchInput = document.getElementById('manualSearch');
+    const sections = document.querySelectorAll('.doc-section');
+
+    searchInput.addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase();
+      sections.forEach(sec => {
+        const text = sec.innerText.toLowerCase();
+        if (text.includes(term)) {
+          sec.style.display = 'block';
+        } else {
+          sec.style.display = 'none';
+        }
+      });
+    });
+
+    // 4. Scroll Spy Navigation Highlighting
+    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
