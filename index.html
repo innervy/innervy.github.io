@@ -798,566 +798,1033 @@
       font-weight: 300;
     }
 
-    /* Responsive Breakdown */
+    /* Mobile Navigation Bar (Hidden on Desktop) */
+    .mobile-navbar {
+      display: none;
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border-color);
+      padding: 0 16px;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 200;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .mobile-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .mobile-brand img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .mobile-brand-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.5px;
+    }
+
+    .mobile-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mobile-app-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #10B981;
+      color: #FFFFFF;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.2);
+    }
+
+    .mobile-menu-toggle {
+      background: var(--bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--text-main);
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    /* Mobile Drawer Overlay */
+    .mobile-drawer-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 250;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .mobile-drawer-overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Mobile Menu Drawer */
+    .mobile-menu-drawer {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 85%;
+      max-width: 320px;
+      height: 100vh;
+      background: #FFFFFF;
+      z-index: 300;
+      padding: 20px;
+      box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mobile-menu-drawer.open {
+      right: 0;
+    }
+
+    .mobile-drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .mobile-drawer-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .mobile-drawer-close {
+      background: none;
+      border: none;
+      font-size: 26px;
+      color: var(--text-subtle);
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .mobile-drawer-footer {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Tablet Responsive Rules (max-width: 992px) */
     @media (max-width: 992px) {
+      body {
+        flex-direction: column;
+      }
       .sidebar {
         display: none;
       }
+      .mobile-navbar {
+        display: flex;
+      }
       main {
         margin-left: 0;
-        padding: 24px;
+        padding: 28px 24px 60px 24px;
+        max-width: 100%;
+      }
+      .hero {
+        padding: 36px 30px;
+        border-radius: var(--radius-lg);
+        margin-bottom: 32px;
+      }
+      .hero-title {
+        font-size: 30px;
+      }
+      .hero-subtitle {
+        font-size: 15px;
+        margin-bottom: 24px;
+      }
+      .hero-stats {
+        gap: 20px;
+      }
+      .stat-value {
+        font-size: 18px;
+      }
+      .doc-section {
+        padding: 28px 24px;
+        border-radius: var(--radius-lg);
+        margin-bottom: 32px;
+      }
+      .section-title {
+        font-size: 23px;
       }
       .spotlight-interactive-container {
         grid-template-columns: 1fr;
+        padding: 24px;
       }
       .spotlight-preview-pane {
         position: static;
+        margin-top: 20px;
       }
     }
+
+    /* Small Screen / Mobile Devices (max-width: 640px) */
+    @media (max-width: 640px) {
+      main {
+        padding: 16px 12px 40px 12px;
+      }
+      .hero {
+        padding: 24px 18px;
+        border-radius: var(--radius-md);
+        margin-bottom: 24px;
+      }
+      .hero-badge {
+        font-size: 11px;
+        padding: 4px 10px;
+        margin-bottom: 14px;
+      }
+      .hero-title {
+        font-size: 24px;
+        letter-spacing: -0.5px;
+        margin-bottom: 12px;
+      }
+      .hero-subtitle {
+        font-size: 13.5px;
+        line-height: 1.55;
+        margin-bottom: 20px;
+      }
+      .hero-cta-group {
+        margin-bottom: 20px;
+      }
+      .hero-btn-primary {
+        width: 100%;
+        justify-content: center;
+        padding: 11px 18px;
+        font-size: 14px;
+      }
+      .hero-stats {
+        flex-direction: column;
+        gap: 12px;
+        padding-top: 18px;
+      }
+      .stat-value {
+        font-size: 16px;
+      }
+      .stat-label {
+        font-size: 11px;
+      }
+      .doc-section {
+        padding: 20px 14px;
+        border-radius: var(--radius-md);
+        margin-bottom: 20px;
+      }
+      .section-header {
+        gap: 12px;
+        padding-bottom: 14px;
+        margin-bottom: 12px;
+      }
+      .section-num-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+        border-radius: var(--radius-sm);
+      }
+      .section-tag {
+        font-size: 10px;
+      }
+      .section-title {
+        font-size: 19px;
+      }
+      .section-desc {
+        font-size: 13.5px;
+        margin-bottom: 20px;
+        line-height: 1.6;
+      }
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+      .feature-card {
+        padding: 18px 16px;
+        border-radius: var(--radius-md);
+      }
+      .feature-title {
+        font-size: 15px;
+      }
+      .feature-body {
+        font-size: 13px;
+      }
+      .callout {
+        padding: 14px 16px;
+        font-size: 13px;
+        border-radius: var(--radius-sm);
+        margin-bottom: 20px;
+      }
+      .screenshot-showcase {
+        padding: 18px 10px;
+        margin-top: 24px;
+        border-radius: var(--radius-lg);
+      }
+      .phone-frame {
+        width: 100%;
+        max-width: 250px;
+        border-radius: 28px;
+        padding: 8px;
+      }
+      .phone-notch {
+        width: 80px;
+        height: 14px;
+        top: 8px;
+      }
+      .phone-screen {
+        border-radius: 22px;
+      }
+      .phone-caption {
+        font-size: 11.5px;
+      }
+      .spotlight-interactive-container {
+        padding: 16px 12px;
+        border-radius: var(--radius-lg);
+      }
+      .spotlight-step-item {
+        padding: 12px;
+        gap: 12px;
+        border-radius: var(--radius-sm);
+      }
+      .step-badge-num {
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
+      }
+      .step-title-text {
+        font-size: 14px;
+      }
+      .step-desc-text {
+        font-size: 12px;
+      }
+      .preview-frame {
+        max-width: 230px;
+        border-radius: 24px;
+        border-width: 6px;
+      }
+      .lightbox-modal {
+        padding: 16px 12px;
+      }
+      .lightbox-content {
+        max-width: 300px;
+        border-width: 6px;
+      }
+      .lightbox-close {
+        top: 16px;
+        right: 20px;
+        font-size: 30px;
+      }
+    }
+
   </style>
 </head>
 <body>
 
-  <!-- Ambient Glow Backgrounds -->
-  <div class="bg-glow-1"></div>
-  <div class="bg-glow-2"></div>
+<!-- Ambient Glow Backgrounds -->
+<div class="bg-glow-1"></div>
+<div class="bg-glow-2"></div>
 
-  <!-- Sidebar Navigation -->
-  <aside class="sidebar">
-    <div class="sidebar-top">
-      <a href="#" class="brand">
-        <img src="/logo.png" alt="Innervy Logo">
-        <div class="brand-info">
-          <span class="brand-title">Innervy</span>
-          <span class="brand-tag">User Manual</span>
-        </div>
-      </a>
+<!-- Mobile Navigation Bar (Visible on mobile/tablet) -->
+<header class="mobile-navbar">
+  <a href="#" class="mobile-brand">
+    <img src="/logo.png" alt="Innervy Logo">
+    <span class="mobile-brand-title">Innervy</span>
+  </a>
+  <div class="mobile-actions">
+    <a href="https://drive.google.com/file/d/1X_XS2VkYcjSoVROPCwH4ZHduujJfBgwA/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="mobile-app-btn">
+      Download App
+    </a>
+    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle Navigation Menu">
+      ☰
+    </button>
+  </div>
+</header>
 
-      <!-- Quick Search Input -->
-      <div class="search-container">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="manualSearch" class="search-input" placeholder="Search guide..." aria-label="Search manual guide">
-      </div>
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer-overlay" id="mobileOverlay"></div>
 
-      <div class="nav-group-title">User Manual Flow</div>
-      <ul class="nav-list" id="navList">
-        <li class="nav-item">
-          <a href="#overview" class="nav-link active">
-            <span class="nav-num">✨</span> Overview & Vision
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#auth" class="nav-link">
-            <span class="nav-num">1</span> Onboarding & Access
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#spotlight" class="nav-link">
-            <span class="nav-num">2</span> Interactive Spotlight
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#dashboard" class="nav-link">
-            <span class="nav-num">3</span> Home & Bento Grid
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#journal" class="nav-link">
-            <span class="nav-num">4</span> Daily Check-In & Notes
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#practices" class="nav-link">
-            <span class="nav-num">5</span> Mindful Practices
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#calendar" class="nav-link">
-            <span class="nav-num">6</span> Reflection Calendar
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#reminders" class="nav-link">
-            <span class="nav-num">7</span> Reminders & Quotes
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="sidebar-footer">
-      <div class="version-badge">
-        <span>Application Version</span>
-        <span class="version-pill">v1.0.2 (Flutter)</span>
-      </div>
-      <a href="https://drive.google.com/file/d/1X_XS2VkYcjSoVROPCwH4ZHduujJfBgwA/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="sidebar-btn-app">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-        </svg>
-        Download App
-      </a>
-      <a href="pdf_manual.html?print=true" target="_blank" class="download-pdf-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9z" />
-        </svg>
-        Download PDF Manual
-      </a>
-    </div>
-  </aside>
-
-  <!-- Main Content Area -->
-  <main>
-
-    <!-- Hero Header Banner -->
-    <header class="hero" id="overview">
-      <div class="hero-badge">🌿 Official User Documentation</div>
-      <h1 class="hero-title">Welcome to Innervy</h1>
-      <p class="hero-subtitle">Innervy is your private companion for overcoming Impostor Syndrome, cultivating self-compassion, and tracking emotional growth through intelligent daily reflections.</p>
-
-      <div class="hero-cta-group">
-        <a href="https://drive.google.com/file/d/1X_XS2VkYcjSoVROPCwH4ZHduujJfBgwA/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="hero-btn-primary">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-          </svg>
-          Download Innervy App
-        </a>
-      </div>
-
-
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-value">OAuth 2.0 & Guest</span>
-          <span class="stat-label">Privacy First Access</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-value">Isolated Hive DB</span>
-          <span class="stat-label">Local On-Device Storage</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-value">5 Mental States</span>
-          <span class="stat-label">Real-Time Insight Engine</span>
-        </div>
-      </div>
-    </header>
-
-    <!-- SECTION 1: Onboarding & Authentication -->
-    <section id="auth" class="doc-section">
-      <div class="section-header">
-        <div class="section-num-icon">1</div>
-        <div class="section-title-wrapper">
-          <span class="section-tag">Getting Started</span>
-          <h2 class="section-title">Onboarding & Authentication</h2>
-        </div>
-      </div>
-      <p class="section-desc">Experience seamless, flexible entry into Innervy. Sign in securely using Google OAuth 2.0 or jump straight into Guest Mode with local database isolation.</p>
-
-      <div class="callout callout-info">
-        <span class="callout-icon">🔒</span>
-        <div><strong>Privacy Guaranteed:</strong> Each user account receives an isolated Hive database stored locally on your device. Switching accounts or using Guest Mode automatically switches database isolates.</div>
-      </div>
-
-      <div class="grid-2">
-        <div class="feature-card">
-          <div>
-            <div class="feature-head">
-              <span class="feature-icon">🔑</span>
-              <h3 class="feature-title">Google Sign-In</h3>
-            </div>
-            <p class="feature-body">Authenticates via official Google OAuth 2.0 protocols. Displays user profile details (display name, email, and avatar) across the dashboard.</p>
-          </div>
-          <span class="action-badge">Tap "Sign in with Google"</span>
-        </div>
-
-        <div class="feature-card">
-          <div>
-            <div class="feature-head">
-              <span class="feature-icon">👤</span>
-              <h3 class="feature-title">Guest Mode</h3>
-            </div>
-            <p class="feature-body">Instant, single-tap access without account creation. Perfect for users who prioritize total anonymity and offline usage.</p>
-          </div>
-          <span class="action-badge">Tap "Continue as Guest"</span>
-        </div>
-      </div>
-
-      <!-- Screenshot Preview Frame -->
-      <div class="screenshot-showcase">
-        <div class="phone-frame">
-          <div class="phone-notch"></div>
-          <img src="assets/screenshots/login_screen.png" alt="Login Screen UI" class="phone-screen clickable-img">
-          <div class="phone-caption">Figure 1.1: Authentication Screen</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 2: Interactive Spotlight Tour Guide -->
-    <section id="spotlight" class="doc-section">
-      <div class="section-header">
-        <div class="section-num-icon">2</div>
-        <div class="section-title-wrapper">
-          <span class="section-tag">UI Walkthrough</span>
-          <h2 class="section-title">Interactive Spotlight Tour Sequence</h2>
-        </div>
-      </div>
-      <p class="section-desc">Innervy features an automated Spotlight Showcase when launched for the first time. This interactive tour highlights key UI elements to help you navigate your emotional growth journey. Click any step below to preview!</p>
-
-      <div class="spotlight-interactive-container">
-        <!-- Steps List -->
-        <div class="spotlight-steps-list" id="spotlightStepsList">
-          <div class="spotlight-step-item active" data-img="assets/screenshots/spotlight_step1_checkin.png">
-            <div class="step-badge-num">1</div>
-            <div class="step-content">
-              <span class="step-title-text">Daily Inspiration Quote 💡</span>
-              <span class="step-desc-text">Spotlights the quote card delivering mindful wisdom tailored to your current emotional state.</span>
-            </div>
-          </div>
-
-          <div class="spotlight-step-item" data-img="assets/screenshots/spotlight_step2_quote.png">
-            <div class="step-badge-num">2</div>
-            <div class="step-content">
-              <span class="step-title-text">Stats Bento Grid 📊</span>
-              <span class="step-desc-text">Highlights your Compassion % gauge meter, daily check-in streak counter, and state badge.</span>
-            </div>
-          </div>
-
-          <div class="spotlight-step-item" data-img="assets/screenshots/spotlight_step3_stats.png">
-            <div class="step-badge-num">3</div>
-            <div class="step-content">
-              <span class="step-title-text">Daily Practices Grid 🧘</span>
-              <span class="step-desc-text">Spotlights the interactive Reality Check (cognitive reframing) and Deep Breath cards.</span>
-            </div>
-          </div>
-
-          <div class="spotlight-step-item" data-img="assets/screenshots/spotlight_step4_practices.png">
-            <div class="step-badge-num">4</div>
-            <div class="step-content">
-              <span class="step-title-text">Reflection Calendar 📅</span>
-              <span class="step-desc-text">Auto-scrolls down to spotlight the calendar card for day, week, and month highlights.</span>
-            </div>
-          </div>
-
-          <div class="spotlight-step-item" data-img="assets/screenshots/spotlight_step5_calendar.png">
-            <div class="step-badge-num">5</div>
-            <div class="step-content">
-              <span class="step-title-text">Check-In Reminders 🔔</span>
-              <span class="step-desc-text">Spotlights the daily background notification controls card and active schedule badge.</span>
-            </div>
-          </div>
-
-          <div class="spotlight-step-item" data-img="assets/screenshots/spotlight_step6_reminders.png">
-            <div class="step-badge-num">6</div>
-            <div class="step-content">
-              <span class="step-title-text">New Reflection FAB ✍️</span>
-              <span class="step-desc-text">Spotlights the primary floating check-in button available on the main dashboard.</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Dynamic Preview Pane -->
-        <div class="spotlight-preview-pane">
-          <img id="spotlightActiveImage" src="assets/screenshots/spotlight_step1_checkin.png" alt="Spotlight Step Preview" class="preview-frame clickable-img">
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 3: Home Dashboard & Bento Analytics -->
-    <section id="dashboard" class="doc-section">
-      <div class="section-header">
-        <div class="section-num-icon">3</div>
-        <div class="section-title-wrapper">
-          <span class="section-tag">Core Hub</span>
-          <h2 class="section-title">Home Dashboard & Bento Analytics</h2>
-        </div>
-      </div>
-      <p class="section-desc">Your personal space designed with glassmorphism cards and ambient animated gradients to give you immediate clarity on your streak, emotional balance, and mindful habits.</p>
-
-      <div class="grid-3">
-        <div class="feature-card">
-          <div class="feature-head">
-            <span class="feature-icon">👋</span>
-            <h3 class="feature-title">Personal Greeting</h3>
-          </div>
-          <p class="feature-body">Displays <i>"Welcome back, Kind Soul"</i> (or your authenticated Google name) alongside quick account switching controls.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-head">
-            <span class="feature-icon">🔥</span>
-            <h3 class="feature-title">Streak Counter</h3>
-          </div>
-          <p class="feature-body">Tracks uninterrupted consecutive days of self-reflection to build lasting mindfulness habits.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-head">
-            <span class="feature-icon">📊</span>
-            <h3 class="feature-title">Compassion Meter</h3>
-          </div>
-          <p class="feature-body">Animated gauge computing your overall self-kindness score and dominant mental state badge.</p>
-        </div>
-      </div>
-
-      <div class="screenshot-showcase">
-        <div class="phone-frame">
-          <div class="phone-notch"></div>
-          <img src="assets/screenshots/home_dashboard.png" alt="Home Dashboard UI" class="phone-screen clickable-img">
-          <div class="phone-caption">Figure 3.1: Main Dashboard Bento Grid</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 4: Daily Check-In & Reflections -->
-    <section id="journal" class="doc-section">
-      <div class="section-header">
-        <div class="section-num-icon">4</div>
-        <div class="section-title-wrapper">
-          <span class="section-tag">Daily Reflection</span>
-          <h2 class="section-title">Daily Check-In & Journaling</h2>
-        </div>
-      </div>
-      <p class="section-desc">Capture your feelings accurately using emotion chips, multiline journal prompts, and intelligent real-time sentiment analysis.</p>
-
-      <div class="grid-2">
-        <div class="feature-card">
-          <div>
-            <div class="feature-head">
-              <span class="feature-icon">🏷️</span>
-              <h3 class="feature-title">Curated Emotion Chips</h3>
-            </div>
-            <p class="feature-body">Select from specific emotion tags tailored for impostor feelings: <i>Fraud, Inadequate, Anxious, Worthy, Resilient, Growing</i>.</p>
-          </div>
-        </div>
-
-        <div class="feature-card">
-          <div>
-            <div class="feature-head">
-              <span class="feature-icon">💡</span>
-              <h3 class="feature-title">Smart Sentiment Engine</h3>
-            </div>
-            <p class="feature-body">As you write in the journal text box, relevant emotion chips are dynamically recommended based on sentiment keywords.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="callout callout-tip">
-        <span class="callout-icon">✨</span>
-        <div><strong>Mental State Classification:</strong> Based on selected emotions and score weights, Innervy classifies entries into 5 distinct state badges: 🌟 <i>Self-Compassion</i>, ✨ <i>Mindfulness</i>, ☁️ <i>Neutral</i>, 🩹 <i>Self-Criticism</i>, and 🫂 <i>Impostor Syndrome</i>.</div>
-      </div>
-
-      <div class="screenshot-showcase">
-        <div class="phone-frame">
-          <div class="phone-notch"></div>
-          <img src="assets/screenshots/journal_reflection.png" alt="Journal Reflection UI" class="phone-screen clickable-img">
-          <div class="phone-caption">Figure 4.1: Check-in Journal & Emotion Chips</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 5: Mindful Practices & Tools -->
-    <section id="practices" class="doc-section">
-      <div class="section-header">
-        <div class="section-num-icon">5</div>
-        <div class="section-title-wrapper">
-          <span class="section-tag">Self-Regulation</span>
-          <h2 class="section-title">Mindful Practices & Reframing</h2>
-        </div>
-      </div>
-      <p class="section-desc">Interactive practices built on Cognitive Behavioral Therapy (CBT) principles to deconstruct imposter thoughts and calm your nervous system.</p>
-
-      <div class="grid-3">
-        <div class="feature-card">
-          <div class="feature-head">
-            <span class="feature-icon">🔍</span>
-            <h3 class="feature-title">The Reality Check</h3>
-          </div>
-          <p class="feature-body">A 5-step guided reframing tool to contrast subjective self-critical thoughts against objective reality.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-head">
-            <span class="feature-icon">🌬️</span>
-            <h3 class="feature-title">Deep Breath Session</h3>
-          </div>
-          <p class="feature-body">Guided rhythmic breathing exercise with expanding visual animations for acute stress relief.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-head">
-            <span class="feature-icon">🫂</span>
-            <h3 class="feature-title">Self-Compassion Break</h3>
-          </div>
-          <p class="feature-body">Structured 3-step exercise focusing on mindfulness, common humanity, and self-kindness.</p>
-        </div>
-      </div>
-
-      <div class="screenshot-showcase">
-        <div class="phone-frame">
-          <div class="phone-notch"></div>
-          <img src="assets/screenshots/daily_practices.png" alt="Mindful Practices Cards" class="phone-screen clickable-img">
-          <div class="phone-caption">Figure 5.1: Daily Practices Grid</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 6: Reflection Calendar & History -->
-    <section id="calendar" class="doc-section">
-      <div class="section-header">
-        <div class="section-num-icon">6</div>
-        <div class="section-title-wrapper">
-          <span class="section-tag">Growth Journey</span>
-          <h2 class="section-title">Reflection Calendar & History</h2>
-        </div>
-      </div>
-      <p class="section-desc">Review your emotional patterns over time with interactive timeline views, color-coded calendar markers, and entry editing tools.</p>
-
-      <div class="grid-2">
-        <div class="feature-card">
-          <div class="feature-head">
-            <span class="feature-icon">📅</span>
-            <h3 class="feature-title">Day / Week / Month Views</h3>
-          </div>
-          <p class="feature-body">Switch between daily timelines, weekly trends, and monthly calendar heatmaps with custom state-color indicators.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-head">
-            <span class="feature-icon">✏️</span>
-            <h3 class="feature-title">Edit & Manage Entries</h3>
-          </div>
-          <p class="feature-body">Tap any past entry to adjust journal notes or emotions. Deletions require a safety confirmation dialog.</p>
-        </div>
-      </div>
-
-      <div class="callout callout-warning">
-        <span class="callout-icon">⚠️</span>
-        <div><strong>Future Date Protection:</strong> Innervy includes strict date validation to prevent logging reflections for future dates, ensuring accurate timeline integrity.</div>
-      </div>
-
-      <div class="screenshot-showcase">
-        <div class="phone-frame">
-          <div class="phone-notch"></div>
-          <img src="assets/screenshots/reflection_calendar.png" alt="Reflection Calendar UI" class="phone-screen clickable-img">
-          <div class="phone-caption">Figure 6.1: Reflection Calendar View</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 7: Background Reminders & Daily Quotes -->
-    <section id="reminders" class="doc-section">
-      <div class="section-header">
-        <div class="section-num-icon">7</div>
-        <div class="section-title-wrapper">
-          <span class="section-tag">Automated Care</span>
-          <h2 class="section-title">Background Reminders & Daily Quotes</h2>
-        </div>
-      </div>
-      <p class="section-desc">Configure native background reminders to receive mindful quote notifications at your ideal time of day.</p>
-
-      <div class="grid-2">
-        <div class="feature-card">
-          <div class="feature-head">
-            <span class="feature-icon">🔔</span>
-            <h3 class="feature-title">Schedule Reminders</h3>
-          </div>
-          <p class="feature-body">Set a custom time using native time pickers (default 8:00 PM). Automatically schedules exact alarms with device timezone support.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-head">
-            <span class="feature-icon">💬</span>
-            <h3 class="feature-title">Mindful Quotes</h3>
-          </div>
-          <p class="feature-body">Delivers inspirational wisdom directly to your device status bar when the app is inactive.</p>
-        </div>
-      </div>
-
-      <div class="screenshot-showcase">
-        <div class="phone-frame">
-          <div class="phone-notch"></div>
-          <img src="assets/screenshots/reminder_settings.png" alt="Reminder Settings Sheet" class="phone-screen clickable-img">
-          <div class="phone-caption">Figure 7.1: Daily Reminder Control Sheet</div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Image Lightbox Modal -->
-  <div class="lightbox-modal" id="lightbox">
-    <span class="lightbox-close" id="lightboxClose">&times;</span>
-    <img src="" alt="Enlarged View" class="lightbox-content" id="lightboxImg">
+<!-- Mobile Menu Drawer -->
+<div class="mobile-menu-drawer" id="mobileDrawer">
+  <div class="mobile-drawer-header">
+    <span class="mobile-drawer-title">Navigation Menu</span>
+    <button class="mobile-drawer-close" id="mobileDrawerClose" aria-label="Close Navigation Menu">&times;</button>
   </div>
 
-  <!-- Interactive JS -->
-  <script>
-    // 1. Spotlight Steps Preview Toggle
-    const stepItems = document.querySelectorAll('.spotlight-step-item');
-    const previewImg = document.getElementById('spotlightActiveImage');
+  <div class="search-container">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="manualSearchMobile" class="search-input" placeholder="Search guide..." aria-label="Search manual guide mobile">
+  </div>
 
-    stepItems.forEach(item => {
-      item.addEventListener('click', () => {
-        stepItems.forEach(s => s.classList.remove('active'));
-        item.classList.add('active');
-        const newSrc = item.getAttribute('data-img');
-        previewImg.src = newSrc;
-      });
+  <ul class="nav-list" id="navListMobile">
+    <li class="nav-item">
+      <a href="#overview" class="nav-link">
+        <span class="nav-num">✨</span> Overview & Vision
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#auth" class="nav-link">
+        <span class="nav-num">1</span> Onboarding & Access
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#spotlight" class="nav-link">
+        <span class="nav-num">2</span> Interactive Spotlight
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#dashboard" class="nav-link">
+        <span class="nav-num">3</span> Home & Bento Grid
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#journal" class="nav-link">
+        <span class="nav-num">4</span> Daily Check-In & Notes
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#practices" class="nav-link">
+        <span class="nav-num">5</span> Mindful Practices
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#calendar" class="nav-link">
+        <span class="nav-num">6</span> Reflection Calendar
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#reminders" class="nav-link">
+        <span class="nav-num">7</span> Reminders & Quotes
+      </a>
+    </li>
+  </ul>
+
+  <div class="mobile-drawer-footer">
+    <a href="https://drive.google.com/file/d/1X_XS2VkYcjSoVROPCwH4ZHduujJfBgwA/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="sidebar-btn-app">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+      </svg>
+      Download App
+    </a>
+    <a href="pdf_manual.html?print=true" target="_blank" class="download-pdf-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9z" />
+      </svg>
+      Download PDF Manual
+    </a>
+  </div>
+</div>
+
+<!-- Sidebar Navigation -->
+
+<aside class="sidebar">
+  <div class="sidebar-top">
+    <a href="#" class="brand">
+      <img src="/logo.png" alt="Innervy Logo">
+      <div class="brand-info">
+        <span class="brand-title">Innervy</span>
+        <span class="brand-tag">User Manual</span>
+      </div>
+    </a>
+
+    <!-- Quick Search Input -->
+    <div class="search-container">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="manualSearch" class="search-input" placeholder="Search guide..." aria-label="Search manual guide">
+    </div>
+
+    <div class="nav-group-title">User Manual Flow</div>
+    <ul class="nav-list" id="navList">
+      <li class="nav-item">
+        <a href="#overview" class="nav-link active">
+          <span class="nav-num">✨</span> Overview & Vision
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#auth" class="nav-link">
+          <span class="nav-num">1</span> Onboarding & Access
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#spotlight" class="nav-link">
+          <span class="nav-num">2</span> Interactive Spotlight
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#dashboard" class="nav-link">
+          <span class="nav-num">3</span> Home & Bento Grid
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#journal" class="nav-link">
+          <span class="nav-num">4</span> Daily Check-In & Notes
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#practices" class="nav-link">
+          <span class="nav-num">5</span> Mindful Practices
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#calendar" class="nav-link">
+          <span class="nav-num">6</span> Reflection Calendar
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#reminders" class="nav-link">
+          <span class="nav-num">7</span> Reminders & Quotes
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="version-badge">
+      <span>Application Version</span>
+      <span class="version-pill">v1.0.2 (Flutter)</span>
+    </div>
+    <a href="https://drive.google.com/file/d/1X_XS2VkYcjSoVROPCwH4ZHduujJfBgwA/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="sidebar-btn-app">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+      </svg>
+      Download App
+    </a>
+    <a href="pdf_manual.html?print=true" target="_blank" class="download-pdf-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9z" />
+      </svg>
+      Download PDF Manual
+    </a>
+  </div>
+</aside>
+
+<!-- Main Content Area -->
+<main>
+
+  <!-- Hero Header Banner -->
+  <header class="hero" id="overview">
+    <div class="hero-badge">🌿 Official User Documentation</div>
+    <h1 class="hero-title">Welcome to Innervy</h1>
+    <p class="hero-subtitle">Innervy is your private companion for overcoming Impostor Syndrome, cultivating self-compassion, and tracking emotional growth through intelligent daily reflections.</p>
+
+    <div class="hero-cta-group">
+      <a href="https://drive.google.com/file/d/1X_XS2VkYcjSoVROPCwH4ZHduujJfBgwA/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="hero-btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        Download Innervy App
+      </a>
+    </div>
+
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-value">OAuth 2.0 & Guest</span>
+        <span class="stat-label">Privacy First Access</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">Isolated Hive DB</span>
+        <span class="stat-label">Local On-Device Storage</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">5 Mental States</span>
+        <span class="stat-label">Real-Time Insight Engine</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION 1: Onboarding & Authentication -->
+  <section id="auth" class="doc-section">
+    <div class="section-header">
+      <div class="section-num-icon">1</div>
+      <div class="section-title-wrapper">
+        <span class="section-tag">Getting Started</span>
+        <h2 class="section-title">Onboarding & Authentication</h2>
+      </div>
+    </div>
+    <p class="section-desc">Experience seamless, flexible entry into Innervy. Sign in securely using Google OAuth 2.0 or jump straight into Guest Mode with local database isolation.</p>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">🔒</span>
+      <div><strong>Privacy Guaranteed:</strong> Each user account receives an isolated Hive database stored locally on your device. Switching accounts or using Guest Mode automatically switches database isolates.</div>
+    </div>
+
+    <div class="grid-2">
+      <div class="feature-card">
+        <div>
+          <div class="feature-head">
+            <span class="feature-icon">🔑</span>
+            <h3 class="feature-title">Google Sign-In</h3>
+          </div>
+          <p class="feature-body">Authenticates via official Google OAuth 2.0 protocols. Displays user profile details (display name, email, and avatar) across the dashboard.</p>
+        </div>
+        <span class="action-badge">Tap "Sign in with Google"</span>
+      </div>
+
+      <div class="feature-card">
+        <div>
+          <div class="feature-head">
+            <span class="feature-icon">👤</span>
+            <h3 class="feature-title">Guest Mode</h3>
+          </div>
+          <p class="feature-body">Instant, single-tap access without account creation. Perfect for users who prioritize total anonymity and offline usage.</p>
+        </div>
+        <span class="action-badge">Tap "Continue as Guest"</span>
+      </div>
+    </div>
+
+    <!-- Screenshot Preview Frame -->
+    <div class="screenshot-showcase">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <img src="assets/screenshots/login_screen.png" alt="Login Screen UI" class="phone-screen clickable-img">
+        <div class="phone-caption">Figure 1.1: Authentication Screen</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: Interactive Spotlight Tour Guide -->
+  <section id="spotlight" class="doc-section">
+    <div class="section-header">
+      <div class="section-num-icon">2</div>
+      <div class="section-title-wrapper">
+        <span class="section-tag">UI Walkthrough</span>
+        <h2 class="section-title">Interactive Spotlight Tour Sequence</h2>
+      </div>
+    </div>
+    <p class="section-desc">Innervy features an automated Spotlight Showcase when launched for the first time. This interactive tour highlights key UI elements to help you navigate your emotional growth journey. Click any step below to preview!</p>
+
+    <div class="spotlight-interactive-container">
+      <!-- Steps List -->
+      <div class="spotlight-steps-list" id="spotlightStepsList">
+        <div class="spotlight-step-item active" data-img="assets/screenshots/spotlight_step1_checkin.png">
+          <div class="step-badge-num">1</div>
+          <div class="step-content">
+            <span class="step-title-text">Daily Inspiration Quote 💡</span>
+            <span class="step-desc-text">Spotlights the quote card delivering mindful wisdom tailored to your current emotional state.</span>
+          </div>
+        </div>
+
+        <div class="spotlight-step-item" data-img="assets/screenshots/spotlight_step2_quote.png">
+          <div class="step-badge-num">2</div>
+          <div class="step-content">
+            <span class="step-title-text">Stats Bento Grid 📊</span>
+            <span class="step-desc-text">Highlights your Compassion % gauge meter, daily check-in streak counter, and state badge.</span>
+          </div>
+        </div>
+
+        <div class="spotlight-step-item" data-img="assets/screenshots/spotlight_step3_stats.png">
+          <div class="step-badge-num">3</div>
+          <div class="step-content">
+            <span class="step-title-text">Daily Practices Grid 🧘</span>
+            <span class="step-desc-text">Spotlights the interactive Reality Check (cognitive reframing) and Deep Breath cards.</span>
+          </div>
+        </div>
+
+        <div class="spotlight-step-item" data-img="assets/screenshots/spotlight_step4_practices.png">
+          <div class="step-badge-num">4</div>
+          <div class="step-content">
+            <span class="step-title-text">Reflection Calendar 📅</span>
+            <span class="step-desc-text">Auto-scrolls down to spotlight the calendar card for day, week, and month highlights.</span>
+          </div>
+        </div>
+
+        <div class="spotlight-step-item" data-img="assets/screenshots/spotlight_step5_calendar.png">
+          <div class="step-badge-num">5</div>
+          <div class="step-content">
+            <span class="step-title-text">Check-In Reminders 🔔</span>
+            <span class="step-desc-text">Spotlights the daily background notification controls card and active schedule badge.</span>
+          </div>
+        </div>
+
+        <div class="spotlight-step-item" data-img="assets/screenshots/spotlight_step6_reminders.png">
+          <div class="step-badge-num">6</div>
+          <div class="step-content">
+            <span class="step-title-text">New Reflection FAB ✍️</span>
+            <span class="step-desc-text">Spotlights the primary floating check-in button available on the main dashboard.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Preview Pane -->
+      <div class="spotlight-preview-pane">
+        <img id="spotlightActiveImage" src="assets/screenshots/spotlight_step1_checkin.png" alt="Spotlight Step Preview" class="preview-frame clickable-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: Home Dashboard & Bento Analytics -->
+  <section id="dashboard" class="doc-section">
+    <div class="section-header">
+      <div class="section-num-icon">3</div>
+      <div class="section-title-wrapper">
+        <span class="section-tag">Core Hub</span>
+        <h2 class="section-title">Home Dashboard & Bento Analytics</h2>
+      </div>
+    </div>
+    <p class="section-desc">Your personal space designed with glassmorphism cards and ambient animated gradients to give you immediate clarity on your streak, emotional balance, and mindful habits.</p>
+
+    <div class="grid-3">
+      <div class="feature-card">
+        <div class="feature-head">
+          <span class="feature-icon">👋</span>
+          <h3 class="feature-title">Personal Greeting</h3>
+        </div>
+        <p class="feature-body">Displays <i>"Welcome back, Kind Soul"</i> (or your authenticated Google name) alongside quick account switching controls.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-head">
+          <span class="feature-icon">🔥</span>
+          <h3 class="feature-title">Streak Counter</h3>
+        </div>
+        <p class="feature-body">Tracks uninterrupted consecutive days of self-reflection to build lasting mindfulness habits.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-head">
+          <span class="feature-icon">📊</span>
+          <h3 class="feature-title">Compassion Meter</h3>
+        </div>
+        <p class="feature-body">Animated gauge computing your overall self-kindness score and dominant mental state badge.</p>
+      </div>
+    </div>
+
+    <div class="screenshot-showcase">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <img src="assets/screenshots/home_dashboard.png" alt="Home Dashboard UI" class="phone-screen clickable-img">
+        <div class="phone-caption">Figure 3.1: Main Dashboard Bento Grid</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: Daily Check-In & Reflections -->
+  <section id="journal" class="doc-section">
+    <div class="section-header">
+      <div class="section-num-icon">4</div>
+      <div class="section-title-wrapper">
+        <span class="section-tag">Daily Reflection</span>
+        <h2 class="section-title">Daily Check-In & Journaling</h2>
+      </div>
+    </div>
+    <p class="section-desc">Capture your feelings accurately using emotion chips, multiline journal prompts, and intelligent real-time sentiment analysis.</p>
+
+    <div class="grid-2">
+      <div class="feature-card">
+        <div>
+          <div class="feature-head">
+            <span class="feature-icon">🏷️</span>
+            <h3 class="feature-title">Curated Emotion Chips</h3>
+          </div>
+          <p class="feature-body">Select from specific emotion tags tailored for impostor feelings: <i>Fraud, Inadequate, Anxious, Worthy, Resilient, Growing</i>.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div>
+          <div class="feature-head">
+            <span class="feature-icon">💡</span>
+            <h3 class="feature-title">Smart Sentiment Engine</h3>
+          </div>
+          <p class="feature-body">As you write in the journal text box, relevant emotion chips are dynamically recommended based on sentiment keywords.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">✨</span>
+      <div><strong>Mental State Classification:</strong> Based on selected emotions and score weights, Innervy classifies entries into 5 distinct state badges: 🌟 <i>Self-Compassion</i>, ✨ <i>Mindfulness</i>, ☁️ <i>Neutral</i>, 🩹 <i>Self-Criticism</i>, and 🫂 <i>Impostor Syndrome</i>.</div>
+    </div>
+
+    <div class="screenshot-showcase">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <img src="assets/screenshots/journal_reflection.png" alt="Journal Reflection UI" class="phone-screen clickable-img">
+        <div class="phone-caption">Figure 4.1: Check-in Journal & Emotion Chips</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: Mindful Practices & Tools -->
+  <section id="practices" class="doc-section">
+    <div class="section-header">
+      <div class="section-num-icon">5</div>
+      <div class="section-title-wrapper">
+        <span class="section-tag">Self-Regulation</span>
+        <h2 class="section-title">Mindful Practices & Reframing</h2>
+      </div>
+    </div>
+    <p class="section-desc">Interactive practices built on Cognitive Behavioral Therapy (CBT) principles to deconstruct imposter thoughts and calm your nervous system.</p>
+
+    <div class="grid-3">
+      <div class="feature-card">
+        <div class="feature-head">
+          <span class="feature-icon">🔍</span>
+          <h3 class="feature-title">The Reality Check</h3>
+        </div>
+        <p class="feature-body">A 5-step guided reframing tool to contrast subjective self-critical thoughts against objective reality.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-head">
+          <span class="feature-icon">🌬️</span>
+          <h3 class="feature-title">Deep Breath Session</h3>
+        </div>
+        <p class="feature-body">Guided rhythmic breathing exercise with expanding visual animations for acute stress relief.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-head">
+          <span class="feature-icon">🫂</span>
+          <h3 class="feature-title">Self-Compassion Break</h3>
+        </div>
+        <p class="feature-body">Structured 3-step exercise focusing on mindfulness, common humanity, and self-kindness.</p>
+      </div>
+    </div>
+
+    <div class="screenshot-showcase">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <img src="assets/screenshots/daily_practices.png" alt="Mindful Practices Cards" class="phone-screen clickable-img">
+        <div class="phone-caption">Figure 5.1: Daily Practices Grid</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: Reflection Calendar & History -->
+  <section id="calendar" class="doc-section">
+    <div class="section-header">
+      <div class="section-num-icon">6</div>
+      <div class="section-title-wrapper">
+        <span class="section-tag">Growth Journey</span>
+        <h2 class="section-title">Reflection Calendar & History</h2>
+      </div>
+    </div>
+    <p class="section-desc">Review your emotional patterns over time with interactive timeline views, color-coded calendar markers, and entry editing tools.</p>
+
+    <div class="grid-2">
+      <div class="feature-card">
+        <div class="feature-head">
+          <span class="feature-icon">📅</span>
+          <h3 class="feature-title">Day / Week / Month Views</h3>
+        </div>
+        <p class="feature-body">Switch between daily timelines, weekly trends, and monthly calendar heatmaps with custom state-color indicators.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-head">
+          <span class="feature-icon">✏️</span>
+          <h3 class="feature-title">Edit & Manage Entries</h3>
+        </div>
+        <p class="feature-body">Tap any past entry to adjust journal notes or emotions. Deletions require a safety confirmation dialog.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-warning">
+      <span class="callout-icon">⚠️</span>
+      <div><strong>Future Date Protection:</strong> Innervy includes strict date validation to prevent logging reflections for future dates, ensuring accurate timeline integrity.</div>
+    </div>
+
+    <div class="screenshot-showcase">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <img src="assets/screenshots/reflection_calendar.png" alt="Reflection Calendar UI" class="phone-screen clickable-img">
+        <div class="phone-caption">Figure 6.1: Reflection Calendar View</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: Background Reminders & Daily Quotes -->
+  <section id="reminders" class="doc-section">
+    <div class="section-header">
+      <div class="section-num-icon">7</div>
+      <div class="section-title-wrapper">
+        <span class="section-tag">Automated Care</span>
+        <h2 class="section-title">Background Reminders & Daily Quotes</h2>
+      </div>
+    </div>
+    <p class="section-desc">Configure native background reminders to receive mindful quote notifications at your ideal time of day.</p>
+
+    <div class="grid-2">
+      <div class="feature-card">
+        <div class="feature-head">
+          <span class="feature-icon">🔔</span>
+          <h3 class="feature-title">Schedule Reminders</h3>
+        </div>
+        <p class="feature-body">Set a custom time using native time pickers (default 8:00 PM). Automatically schedules exact alarms with device timezone support.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-head">
+          <span class="feature-icon">💬</span>
+          <h3 class="feature-title">Mindful Quotes</h3>
+        </div>
+        <p class="feature-body">Delivers inspirational wisdom directly to your device status bar when the app is inactive.</p>
+      </div>
+    </div>
+
+    <div class="screenshot-showcase">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <img src="assets/screenshots/reminder_settings.png" alt="Reminder Settings Sheet" class="phone-screen clickable-img">
+        <div class="phone-caption">Figure 7.1: Daily Reminder Control Sheet</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Image Lightbox Modal -->
+<div class="lightbox-modal" id="lightbox">
+  <span class="lightbox-close" id="lightboxClose">&times;</span>
+  <img src="" alt="Enlarged View" class="lightbox-content" id="lightboxImg">
+</div>
+
+<!-- Interactive JS -->
+<script>
+  // 1. Spotlight Steps Preview Toggle
+  const stepItems = document.querySelectorAll('.spotlight-step-item');
+  const previewImg = document.getElementById('spotlightActiveImage');
+
+  stepItems.forEach(item => {
+    item.addEventListener('click', () => {
+      stepItems.forEach(s => s.classList.remove('active'));
+      item.classList.add('active');
+      const newSrc = item.getAttribute('data-img');
+      previewImg.src = newSrc;
     });
+  });
 
-    // 2. Lightbox Modal
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-    const lightboxClose = document.getElementById('lightboxClose');
+  // 2. Lightbox Modal
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
 
-    document.querySelectorAll('.clickable-img').forEach(img => {
-      img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightbox.classList.add('active');
-      });
+  document.querySelectorAll('.clickable-img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightbox.classList.add('active');
     });
+  });
 
-    lightboxClose.addEventListener('click', () => {
+  lightboxClose.addEventListener('click', () => {
+    lightbox.classList.remove('active');
+  });
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
       lightbox.classList.remove('active');
-    });
+    }
+  });
 
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) {
-        lightbox.classList.remove('active');
+  // 3. Search Filter
+  const searchInput = document.getElementById('manualSearch');
+  const searchInputMobile = document.getElementById('manualSearchMobile');
+  const sections = document.querySelectorAll('.doc-section');
+
+  function filterSections(term) {
+    sections.forEach(sec => {
+      const text = sec.innerText.toLowerCase();
+      if (text.includes(term)) {
+        sec.style.display = 'block';
+      } else {
+        sec.style.display = 'none';
+      }
+    });
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => filterSections(e.target.value.toLowerCase()));
+  }
+  if (searchInputMobile) {
+    searchInputMobile.addEventListener('input', (e) => filterSections(e.target.value.toLowerCase()));
+  }
+
+  // 4. Scroll Spy Navigation Highlighting
+  const navLinks = document.querySelectorAll('.nav-link');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 120;
+      if (window.scrollY >= sectionTop) {
+        current = section.getAttribute('id');
       }
     });
 
-    // 3. Search Filter
-    const searchInput = document.getElementById('manualSearch');
-    const sections = document.querySelectorAll('.doc-section');
-
-    searchInput.addEventListener('input', (e) => {
-      const term = e.target.value.toLowerCase();
-      sections.forEach(sec => {
-        const text = sec.innerText.toLowerCase();
-        if (text.includes(term)) {
-          sec.style.display = 'block';
-        } else {
-          sec.style.display = 'none';
-        }
-      });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
     });
+  });
 
-    // 4. Scroll Spy Navigation Highlighting
-    const navLinks = document.querySelectorAll('.nav-link');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 120;
-        if (window.scrollY >= sectionTop) {
-          current = section.getAttribute('id');
-        }
-      });
+  // 5. Mobile Drawer Menu Controls
+  const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+  const mobileDrawerClose = document.getElementById('mobileDrawerClose');
+  const mobileDrawer = document.getElementById('mobileDrawer');
+  const mobileOverlay = document.getElementById('mobileOverlay');
 
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) {
-          link.classList.add('active');
-        }
-      });
-    });
-  </script>
+  function openMobileMenu() {
+    if (mobileDrawer && mobileOverlay) {
+      mobileDrawer.classList.add('open');
+      mobileOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeMobileMenu() {
+    if (mobileDrawer && mobileOverlay) {
+      mobileDrawer.classList.remove('open');
+      mobileOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  if (mobileMenuToggle) mobileMenuToggle.addEventListener('click', openMobileMenu);
+  if (mobileDrawerClose) mobileDrawerClose.addEventListener('click', closeMobileMenu);
+  if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
+
+  // Auto-close mobile menu when navigating to a section
+  document.querySelectorAll('#navListMobile .nav-link').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+</script>
 </body>
 </html>
