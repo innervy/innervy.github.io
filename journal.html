@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion & Reflection</title>
+    <style>
+        :root {
+            --primary: #6c63ff;
+            --primary-hover: #5a52d5;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #333333;
+            --border: #d1d5db;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100%;
+            max-width: 700px;
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 20px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1.05rem;
+            resize: vertical;
+            box-sizing: border-box;
+            margin-bottom: 25px;
+            background-color: #fcfcfc;
+            line-height: 1.5;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+        }
+        .assess-btn {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .assess-btn:disabled {
+            background-color: #a0aec0;
+            cursor: not-allowed;
+        }
+        .assess-btn:hover:not(:disabled) {
+            background-color: var(--primary-hover);
+        }
+        
+        /* --- MODAL STYLES --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 15px;
+        }
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.3rem;
+            color: #2d3748;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #a0aec0;
+            transition: color 0.2s;
+        }
+        .close-btn:hover {
+            color: #4a5568;
+        }
+        .modal-body {
+            overflow-y: auto;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            color: #4a5568;
+            font-size: 1.15rem;
+            text-align: center; 
+            padding: 10px 0;
+        }
+        .disclaimer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #a0aec0;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>What's on your mind?</h1>
+        <p class="subtitle">Write freely. The AI will listen, identify your core emotions, and offer a reflection.</p>
+
+        <textarea id="user-input" placeholder="I'm feeling really overwhelmed with work lately. I feel like I'm falling behind and everyone else seems to have it together..."></textarea>
+        
+        <button class="assess-btn" id="assess-btn">Identify My Emotion & Reflect</button>
+
+        <div class="disclaimer">
+            This tool uses AI for emotional reflection and is not a substitute for professional mental health support. 
+        </div>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="result-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Your Emotional Reflection</h2>
+                <button class="close-btn" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-text">
+                <!-- AI streaming text goes here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const API_KEY = 'AQ.Ab8RN6IFm61pXMwsrTlWSo0DFpnckOFC_Y-gcsDjb8yO1j0pww'; 
+        const MODEL_NAME = 'gemini-3.8-flash';
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:streamGenerateContent?alt=sse`;
+
+        // --- UI ELEMENTS ---
+        const assessBtn = document.getElementById('assess-btn');
+        const userInput = document.getElementById('user-input');
+        
+        const modal = document.getElementById('result-modal');
+        const modalText = document.getElementById('modal-text');
+        const closeModalBtn = document.getElementById('close-modal');
+
+        // Close Modal Logic
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+
+        // --- API LOGIC ---
+        assessBtn.addEventListener('click', async () => {
+            const textInput = userInput.value.trim();
+
+            if (!textInput) {
+                alert("Please write a little about what's on your mind first.");
+                return;
+            }
+
+            modal.classList.add('active');
+            modalText.textContent = "Reading between the lines...";
+            modalText.style.color = "#718096";
+            
+            assessBtn.disabled = true;
+            assessBtn.textContent = "Analyzing...";
+
+            // --- UPDATED PROMPT WITH ADVICE SECTION ---
+            const prompt = `
+You are an empathetic emotional intelligence AI.
+The user has shared the following context: "${textInput}"
+
+Your task is to:
+1. Read the text and identify ALL the emotions from this specific allowed list that apply to the user's state:
+- 😰 Anxious / Worried
+- 😵‍💫 Overwhelmed
+- 😢 Sad / Down
+- 😤 Frustrated
+- 😟 Insecure / Doubtful
+- 🫥 Numb / Disconnected
+- 😌 Calm / Peaceful
+- 😊 Happy / Grateful
+- 😫 Stressed
+- 😞 Upset
+
+2. Provide a deeply comforting, relevant motivational quote that speaks to this exact combination of feelings.
+3. Provide a brief, gentle piece of actionable advice (1-2 sentences) to help lessen their negative emotions or nurture their positive ones.
+
+You MUST format your response exactly like this example, with NO introduction and NO extra text:
+
+😰 Anxious / Worried & 😫 Stressed
+
+**A Quote to Hold Onto:**
+"You do not have to be good. You only have to let the soft animal of your body love what it loves."
+— Mary Oliver
+
+**💡 A Gentle Step Forward:**
+Try taking three slow, deep breaths right now, and write down just one small task you can focus on today. Give yourself permission to pause and step away from the screen for five minutes.
+
+Rules:
+- ONLY use the emotions provided in the allowed list above. Do not invent new ones.
+- Output ALL the emotions from the list that are present in the text, separated by " & ".
+- Do NOT write paragraphs validating their feelings. Keep it strictly to the format.
+- ONLY output the Emoji + Identified Emotion(s) on the first line.
+- Then a blank line.
+- Then the Quote section exactly as shown above.
+- Then a blank line.
+- Then the Advice section starting with "**💡 A Gentle Step Forward:**".
+`;
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-goog-api-key': API_KEY
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            role: "user",
+                            parts: [{ text: prompt }]
+                        }],
+                        systemInstruction: {
+                            parts: [{ text: "You are a strict formatting bot. You only output the exact structure requested without any conversational filler." }]
+                        }
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error?.message || "API request failed. Check your API key.");
+                }
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder('utf-8');
+                let aiResponseText = '';
+                
+                modalText.textContent = ''; 
+                modalText.style.color = "#4a5568";
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    const chunk = decoder.decode(value, { stream: true });
+                    const lines = chunk.split('\n');
+
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            try {
+                                const data = JSON.parse(line.slice(6));
+                                const content = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                                if (content) {
+                                    aiResponseText += content;
+                                    modalText.textContent = aiResponseText;
+                                    modalText.scrollTop = modalText.scrollHeight;
+                                }
+                            } catch (e) {}
+                        }
+                    }
+                }
+
+            } catch (error) {
+                modalText.textContent = "Error: " + error.message;
+                modalText.style.color = "red";
+            } finally {
+                assessBtn.disabled = false;
+                assessBtn.textContent = "Identify My Emotion & Reflect";
+            }
+        });
+    </script>
+</body>
+</html>
